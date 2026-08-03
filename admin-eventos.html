@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Eventos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="img/3.png">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar" id="sidebar">
+            <div class="admin-sidebar__logo">
+                <img src="img/5.png" alt="Logo">
+                <h2>Admin</h2>
+            </div>
+            <ul class="admin-sidebar__menu">
+                <li><a href="admin.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="admin-eventos.html" class="active"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
+                <li><a href="admin-produtos.html"><i class="fas fa-box"></i> Produtos</a></li>
+                <li><a href="admin-depoimentos.html"><i class="fas fa-comment-dots"></i> Depoimentos</a></li>
+                <li><a href="admin-leads.html"><i class="fas fa-users"></i> Leads</a></li>
+            </ul>
+            <div class="admin-sidebar__footer">
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <button class="btn-toggle-sidebar" id="btnToggleSidebar"><i class="fas fa-bars"></i></button>
+                    <h1>Gerenciar Eventos</h1>
+                </div>
+                <button class="btn-primary" onclick="openModalEvento()"><i class="fas fa-plus"></i> Novo Evento</button>
+            </div>
+
+            <div class="admin-table-container">
+                <div class="admin-table-container__header">
+                    <h3>Todos os Eventos</h3>
+                    <input type="text" placeholder="Buscar evento..." id="searchEvento" onkeyup="filterTable('eventosTable', this.value)">
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Cidade</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="eventosTable">
+                        <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--cinza);">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="admin-modal" id="modalEvento">
+        <div class="admin-modal__content">
+            <button class="admin-modal__close" onclick="closeModalEvento()">&times;</button>
+            <h2 class="admin-modal__title" id="modalEventoTitle">Novo Evento</h2>
+            <form id="formEvento" onsubmit="saveEvento(event)">
+                <input type="hidden" id="evento_id">
+                <div class="form-group">
+                    <label for="evento_titulo">Título *</label>
+                    <input type="text" id="evento_titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="evento_subtitulo">Subtítulo</label>
+                    <input type="text" id="evento_subtitulo">
+                </div>
+                <div class="form-group">
+                    <label for="evento_descricao">Descrição</label>
+                    <textarea id="evento_descricao" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="evento_cidade">Cidade</label>
+                    <input type="text" id="evento_cidade">
+                </div>
+                <div class="form-group">
+                    <label for="evento_local">Local</label>
+                    <input type="text" id="evento_local">
+                </div>
+                <div class="form-group">
+                    <label for="evento_data">Data</label>
+                    <input type="date" id="evento_data">
+                </div>
+                <div class="form-group">
+                    <label for="evento_horario">Horário</label>
+                    <input type="text" id="evento_horario" placeholder="08:00 - 18:00">
+                </div>
+                <div class="form-group">
+                    <label for="evento_valor">Valor (R$)</label>
+                    <input type="number" id="evento_valor" step="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label for="evento_banner">URL do Banner</label>
+                    <input type="text" id="evento_banner" placeholder="/uploads/evento.jpg">
+                </div>
+                <button type="submit" class="btn-submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('adminToken');
+            if (!token) window.location.href = '/login.html';
+            loadEventos();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado! - Francine Canonici Macário de Carvalho </title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="img/3.png">
+    <style>
+        .obrigado {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .obrigado__content {
+            max-width: 700px;
+        }
+
+        .obrigado__icon {
+            font-size: 80px;
+            color: var(--azul);
+            margin-bottom: 30px;
+        }
+
+        .obrigado__title {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .obrigado__title .highlight {
+            background: var(--gradiente);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .obrigado__info {
+            background: var(--cinza-claro);
+            padding: 30px;
+            border-radius: var(--radius);
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .obrigado__info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .obrigado__info-item:last-child {
+            border-bottom: none;
+        }
+
+        .obrigado__info-item i {
+            color: var(--azul);
+            font-size: 24px;
+            width: 30px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da851;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header__logo">
+            <img src="img/3.png" alt="Logo">
+        </div>
+    </div>
+</header>
+
+<section class="obrigado">
+    <div class="container">
+        <div class="obrigado__content">
+            <div class="obrigado__icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="obrigado__title">Inscrição <span class="highlight">Confirmada!</span> 🎉</h1>
+            <p style="font-size: 20px; color: var(--cinza);">Parabéns! Sua vaga na Imersão foi garantida com sucesso.</p>
+
+            <div class="obrigado__info">
+                <h3 style="margin-bottom: 20px;">📋 Informações do Evento</h3>
+                <div class="obrigado__info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span><strong>Data:</strong> 15 de Novembro, 2026</span>
+                </div>
+                <div class="obrigado__info-item">
+                    <i class="fas fa-clock"></i>
+                    <span><strong>Horário:</strong> 08:00 - 18:00</span>
+                </div>
+                <div class="obrigado__info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span><strong>Local:</strong> São Paulo - SP</span>
+                </div>
+            </div>
+
+            <div style="margin: 30px 0;">
+                <h3>📌 Próximos Passos</h3>
+                <ol style="text-align: left; max-width: 400px; margin: 20px auto; line-height: 2.5;">
+                    <li>✓ Confira seu e-mail com todos os detalhes</li>
+                    <li>✓ Adicione nosso WhatsApp para receber atualizações</li>
+                    <li>✓ Prepare-se para uma experiência transformadora!</li>
+                </ol>
+            </div>
+
+            <a href="https://wa.me/5511999999999" target="_blank" class="btn-primary btn-whatsapp btn-large">
+                <i class="fab fa-whatsapp"></i> Entrar no Grupo VIP do WhatsApp
+            </a>
+            <br><br>
+            <a href="index.html" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i> Voltar para o site
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer__bottom">
+            <p>© 2026 Francine Canonici Macário de Carvalho. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

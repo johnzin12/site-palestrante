@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f7; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .header { background: #fff; padding: 16px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header .container { display: flex; justify-content: space-between; align-items: center; }
+        .header__nav ul { display: flex; gap: 30px; list-style: none; }
+        .header__nav a { text-decoration: none; color: #1A1A2E; font-weight: 600; }
+        .header__nav a.active { color: #4A90D9; }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #4A90D9, #7C3AED); 
+            color: #fff; 
+            padding: 12px 24px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(74,144,217,0.4); }
+        
+        .section { padding: 60px 0; }
+        .section__header { text-align: center; margin-bottom: 40px; }
+        .section__tag { 
+            background: linear-gradient(135deg, #4A90D9, #7C3AED); 
+            color: #fff; 
+            padding: 4px 20px; 
+            border-radius: 20px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            display: inline-block; 
+        }
+        .section__title { font-size: 36px; font-weight: 700; margin-top: 12px; }
+        .highlight { background: linear-gradient(135deg, #4A90D9, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section__subtitle { color: #6B6B6B; font-size: 18px; margin-top: 8px; }
+        
+        .produtos-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+            padding: 20px 0; 
+        }
+        
+        .produto-card { 
+            background: #fff; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            transition: all 0.3s ease; 
+        }
+        .produto-card:hover { transform: translateY(-10px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+        
+        .produto-card__image { 
+            width: 100%; 
+            height: 200px; 
+            background: linear-gradient(135deg, #4A90D9, #7C3AED); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #fff; 
+            font-size: 48px; 
+        }
+        
+        .produto-card__body { padding: 24px; }
+        .produto-card__category { 
+            background: linear-gradient(135deg, #4A90D9, #7C3AED); 
+            color: #fff; 
+            padding: 4px 12px; 
+            border-radius: 20px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            display: inline-block; 
+            margin-bottom: 10px; 
+        }
+        .produto-card__title { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #1A1A2E; }
+        .produto-card__description { color: #6B6B6B; font-size: 14px; margin-bottom: 15px; line-height: 1.6; }
+        .produto-card__price { 
+            font-size: 28px; 
+            font-weight: 700; 
+            background: linear-gradient(135deg, #4A90D9, #7C3AED); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            margin-bottom: 15px; 
+        }
+        .produto-card__button { width: 100%; justify-content: center; text-align: center; }
+        
+        .footer { background: #1A1A2E; color: #fff; padding: 30px 0; text-align: center; }
+        .footer p { color: #999; }
+        
+        .loading { text-align: center; padding: 60px; color: #6B6B6B; }
+        .loading i { font-size: 48px; color: #4A90D9; animation: spin 1s linear infinite; }
+        
+        .error { text-align: center; padding: 60px; color: #EF4444; }
+        .error i { font-size: 48px; margin-bottom: 16px; }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .empty { text-align: center; padding: 60px; color: #6B6B6B; }
+        .empty i { font-size: 48px; color: #4A90D9; margin-bottom: 16px; opacity: 0.5; }
+        
+        @media (max-width: 768px) {
+            .header__nav ul { gap: 15px; }
+            .produtos-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+        }
+        @media (max-width: 480px) {
+            .produtos-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header__logo">
+            <h1 style="color:#4A90D9; font-size:24px;">LOGO</h1>
+        </div>
+        <nav class="header__nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="imersao.html">Imersão</a></li>
+                <li><a href="produtos.html" class="active">Produtos</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="section">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__tag">Produtos</span>
+            <h1 class="section__title">Cursos e <span class="highlight">Mentorias</span></h1>
+            <p class="section__subtitle">Acesse conteúdos exclusivos para continuar sua jornada</p>
+        </div>
+
+        <div id="produtosContainer">
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Carregando produtos...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2025 Francine Canonici Macário de Carvalho. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+    console.log('🔵 Página produtos.html carregada!');
+    
+    // ============================================
+    // CARREGAR PRODUTOS
+    // ============================================
+    async function carregarProdutos() {
+        const container = document.getElementById('produtosContainer');
+        
+        try {
+            console.log('🔵 1. Buscando produtos...');
+            
+            const response = await fetch('/api/produtos');
+            console.log('🔵 2. Status da resposta:', response.status);
+            
+            if (!response.ok) {
+                throw new Error('Erro HTTP: ' + response.status);
+            }
+            
+            const produtos = await response.json();
+            console.log('🔵 3. Produtos recebidos:', produtos);
+            console.log('🔵 4. Quantidade:', produtos.length);
+            
+            if (produtos.length === 0) {
+                container.innerHTML = `
+                    <div class="empty">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Nenhum produto disponível</h3>
+                        <p>Volte em breve!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div class="produtos-grid">';
+            
+            produtos.forEach((produto, index) => {
+                console.log(`🔵 5. Processando produto ${index + 1}:`, produto.nome);
+                
+                const preco = Number(produto.preco).toFixed(2);
+                const categoria = produto.categoria || 'Produto';
+                const nome = produto.nome || 'Produto sem nome';
+                const descricao = produto.descricao || '';
+                const link = produto.link || '#';
+                
+                html += `
+                    <div class="produto-card">
+                        <div class="produto-card__image">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="produto-card__body">
+                            <span class="produto-card__category">${categoria}</span>
+                            <h3 class="produto-card__title">${nome}</h3>
+                            <p class="produto-card__description">${descricao}</p>
+                            <div class="produto-card__price">R$ ${preco}</div>
+                            <a href="${link}" class="btn-primary produto-card__button" target="_blank">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+            
+            console.log('✅ 6. Produtos carregados com sucesso!');
+            
+        } catch (error) {
+            console.error('❌ Erro ao carregar produtos:', error);
+            container.innerHTML = `
+                <div class="error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Erro ao carregar produtos</h3>
+                    <p>${error.message}</p>
+                    <br>
+                    <button onclick="carregarProdutos()" class="btn-primary">
+                        <i class="fas fa-sync"></i> Tentar Novamente
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // ============================================
+    // INICIAR - COM DELAY PARA GARANTIR
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🔵 DOM carregado, iniciando...');
+        setTimeout(carregarProdutos, 100);
+    });
+</script>
+
+</body>
+</html>

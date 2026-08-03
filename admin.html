@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="img/3.png">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="sidebar">
+            <div class="admin-sidebar__logo">
+                <img src="img/1.png" alt="Logo">
+                <h2>Admin</h2>
+            </div>
+            <ul class="admin-sidebar__menu">
+                <li><a href="admin.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="admin-eventos.html"><i class="fas fa-calendar-alt"></i> Eventos <span class="badge" id="eventosBadge">0</span></a></li>
+                <li><a href="admin-produtos.html"><i class="fas fa-box"></i> Produtos <span class="badge" id="produtosBadge">0</span></a></li>
+                <li><a href="admin-depoimentos.html"><i class="fas fa-comment-dots"></i> Depoimentos <span class="badge" id="depoimentosBadge">0</span></a></li>
+                <li><a href="admin-leads.html"><i class="fas fa-users"></i> Leads <span class="badge" id="leadsBadge">0</span></a></li>
+            </ul>
+            <div class="admin-sidebar__footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div>
+                        <div class="user-name" id="userName">Admin</div>
+                        <div class="user-email" id="userEmail">admin@palestrante.com</div>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <button class="btn-toggle-sidebar" id="btnToggleSidebar"><i class="fas fa-bars"></i></button>
+                    <h1>Dashboard</h1>
+                </div>
+                <a href="/" target="_blank" class="btn-secondary"><i class="fas fa-external-link-alt"></i> Ver Site</a>
+            </div>
+
+            <div class="admin-dashboard">
+                <div class="dashboard-card">
+                    <div class="dashboard-card__header">
+                        <div>
+                            <div class="dashboard-card__number" id="totalEventos">0</div>
+                            <div class="dashboard-card__label">Eventos</div>
+                        </div>
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dashboard-card__header">
+                        <div>
+                            <div class="dashboard-card__number" id="totalProdutos">0</div>
+                            <div class="dashboard-card__label">Produtos</div>
+                        </div>
+                        <i class="fas fa-box"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dashboard-card__header">
+                        <div>
+                            <div class="dashboard-card__number" id="totalDepoimentos">0</div>
+                            <div class="dashboard-card__label">Depoimentos</div>
+                        </div>
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dashboard-card__header">
+                        <div>
+                            <div class="dashboard-card__number" id="totalLeads">0</div>
+                            <div class="dashboard-card__label">Leads</div>
+                        </div>
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px; color: var(--preto);">Ações Rápidas</h3>
+            <div class="admin-modules">
+                <a href="admin-eventos.html" class="admin-module">
+                    <div class="admin-module__icon"><i class="fas fa-plus-circle"></i></div>
+                    <div class="admin-module__title">Criar Evento</div>
+                    <div class="admin-module__description">Adicione um novo evento</div>
+                </a>
+                <a href="admin-produtos.html" class="admin-module">
+                    <div class="admin-module__icon"><i class="fas fa-plus-circle"></i></div>
+                    <div class="admin-module__title">Adicionar Produto</div>
+                    <div class="admin-module__description">Cadastre um novo produto</div>
+                </a>
+                <a href="admin-depoimentos.html" class="admin-module">
+                    <div class="admin-module__icon"><i class="fas fa-plus-circle"></i></div>
+                    <div class="admin-module__title">Adicionar Depoimento</div>
+                    <div class="admin-module__description">Cadastre um novo depoimento</div>
+                </a>
+                <a href="admin-leads.html" class="admin-module">
+                    <div class="admin-module__icon"><i class="fas fa-file-export"></i></div>
+                    <div class="admin-module__title">Exportar Leads</div>
+                    <div class="admin-module__description">Baixe a lista de leads</div>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar token
+            const token = localStorage.getItem('adminToken');
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            loadDashboard();
+
+            // Badges
+            async function updateBadges() {
+                try {
+                    const [eventos, produtos, depoimentos, leads] = await Promise.all([
+                        fetch('/api/eventos', { headers: { 'Authorization': `Bearer ${token}` } }).then(r => r.json()),
+                        fetch('/api/produtos', { headers: { 'Authorization': `Bearer ${token}` } }).then(r => r.json()),
+                        fetch('/api/depoimentos', { headers: { 'Authorization': `Bearer ${token}` } }).then(r => r.json()),
+                        fetch('/api/leads', { headers: { 'Authorization': `Bearer ${token}` } }).then(r => r.json())
+                    ]);
+                    document.getElementById('eventosBadge').textContent = eventos.length || 0;
+                    document.getElementById('produtosBadge').textContent = produtos.length || 0;
+                    document.getElementById('depoimentosBadge').textContent = depoimentos.length || 0;
+                    document.getElementById('leadsBadge').textContent = leads.length || 0;
+                } catch (error) {
+                    console.error('Erro:', error);
+                }
+            }
+            updateBadges();
+        });
+    </script>
+</body>
+</html>

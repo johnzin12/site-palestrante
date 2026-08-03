@@ -1,0 +1,545 @@
+/* ============================================
+   IMERSAO.CSS - COMPLETO
+   ============================================ */
+
+/* ============================================
+   EVENTO BANNER
+   ============================================ */
+.evento-banner {
+    padding: 120px 0 60px;
+    background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+}
+
+.evento-banner__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.evento-banner__tag {
+    display: inline-block;
+    background: #EF4444;
+    color: var(--branco);
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.evento-banner__titulo {
+    font-size: 44px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.evento-banner__detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.evento-banner__detalhes .detalhe {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: var(--cinza);
+}
+
+.evento-banner__detalhes .detalhe i {
+    color: var(--azul);
+    width: 20px;
+}
+
+.evento-banner__preco {
+    margin-bottom: 24px;
+}
+
+.preco-antigo {
+    font-size: 18px;
+    color: #999;
+    text-decoration: line-through;
+    display: block;
+}
+
+.preco-atual {
+    font-size: 42px;
+    font-weight: 800;
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+}
+
+.preco-parcelado {
+    font-size: 16px;
+    color: var(--cinza);
+}
+
+.evento-banner__garantia {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.evento-banner__garantia i {
+    color: var(--azul);
+}
+
+.evento-banner__image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+}
+
+/* ============================================
+   OBJETIVO
+   ============================================ */
+.objetivo__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.objetivo__text ul {
+    list-style: none;
+    margin-top: 16px;
+}
+
+.objetivo__text ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+}
+
+.objetivo__text ul li i {
+    color: var(--azul);
+}
+
+.objetivo__publico {
+    background: var(--cinza-claro);
+    padding: 30px;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--azul);
+}
+
+.objetivo__publico h3 {
+    margin-bottom: 16px;
+    color: var(--azul);
+}
+
+.objetivo__publico ul {
+    list-style: none;
+}
+
+.objetivo__publico ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 15px;
+}
+
+.objetivo__publico ul li:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   PROGRAMAÇÃO
+   ============================================ */
+.programacao__timeline {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 30px;
+    padding: 20px 0;
+    padding-left: 30px;
+    margin-left: 30px;
+    position: relative;
+    border-left: 3px solid var(--azul);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 24px;
+    width: 15px;
+    height: 15px;
+    background: var(--gradiente);
+    border-radius: 50%;
+}
+
+.timeline-item__time {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--azul);
+}
+
+.timeline-item__content h4 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.timeline-item__content p {
+    color: var(--cinza);
+    font-size: 15px;
+}
+
+/* ============================================
+   CONTEÚDO
+   ============================================ */
+.conteudo__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.conteudo-card {
+    text-align: center;
+    padding: 30px;
+    background: var(--branco);
+    border-radius: var(--radius);
+    box-shadow: var(--sombra-card);
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.conteudo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra);
+    border-color: var(--azul-claro);
+}
+
+.conteudo-card i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.conteudo-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.conteudo-card p {
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+/* ============================================
+   BÔNUS
+   ============================================ */
+.bonus {
+    background: var(--cinza-claro);
+}
+
+.bonus__list {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.bonus-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.bonus-item:last-child {
+    border-bottom: none;
+}
+
+.bonus-item__icon {
+    font-size: 32px;
+    color: var(--azul);
+    flex-shrink: 0;
+}
+
+.bonus-item__content h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.bonus-item__content p {
+    color: var(--cinza);
+}
+
+/* ============================================
+   FAQ
+   ============================================ */
+.faq__accordion {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 2px solid var(--cinza-claro);
+}
+
+.faq__question {
+    width: 100%;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--preto);
+    transition: var(--transition);
+}
+
+.faq__question:hover {
+    color: var(--azul);
+}
+
+.faq__question i {
+    transition: var(--transition);
+}
+
+.faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: var(--cinza);
+}
+
+.faq__answer p {
+    padding-bottom: 20px;
+}
+
+.faq-item.active .faq__question i {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq__answer {
+    max-height: 200px;
+}
+
+/* ============================================
+   COMPRAR
+   ============================================ */
+.comprar {
+    background: var(--preto);
+    color: var(--branco);
+    text-align: center;
+}
+
+.comprar h2 {
+    font-size: 40px;
+    margin-bottom: 24px;
+}
+
+.comprar__preco {
+    margin-bottom: 30px;
+}
+
+.comprar__preco .preco-antigo {
+    font-size: 20px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.comprar__preco .preco-atual {
+    font-size: 48px;
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.comprar__preco .preco-parcelado {
+    font-size: 18px;
+    color: #999;
+}
+
+.comprar__seguranca {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.comprar__seguranca span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #999;
+    font-size: 14px;
+}
+
+.comprar__seguranca i {
+    color: var(--azul);
+}
+
+/* ============================================
+   SLIDER - DEPOIMENTOS
+   ============================================ */
+.depoimentos__slider {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slider__container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slider__container .depoimento-card {
+    min-width: 100%;
+    flex-shrink: 0;
+}
+
+.slider__controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.slider__controls button {
+    background: var(--branco);
+    border: 2px solid #e0e0e0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 18px;
+    color: var(--preto);
+}
+
+.slider__controls button:hover {
+    background: var(--gradiente);
+    color: var(--branco);
+    border-color: var(--azul);
+}
+
+.slider__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.slider__dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.slider__dots .dot.active {
+    background: var(--azul);
+    width: 30px;
+    border-radius: 10px;
+}
+
+/* ============================================
+   DEPOIMENTO CARD
+   ============================================ */
+.depoimento-card {
+    padding: 30px;
+    background: var(--branco);
+    border-radius: var(--radius);
+    box-shadow: var(--sombra-card);
+    border: 1px solid rgba(74, 144, 217, 0.1);
+}
+
+.depoimento-card__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.depoimento-card__foto {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--azul);
+}
+
+.depoimento-card__info h4 {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.depoimento-card__info span {
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.depoimento-card__texto {
+    font-size: 18px;
+    color: var(--cinza);
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.depoimento-card__stars {
+    color: #F59E0B;
+    font-size: 16px;
+}
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+@media (max-width: 1024px) {
+    .evento-banner__content {
+        grid-template-columns: 1fr;
+    }
+    .objetivo__content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .evento-banner__titulo {
+        font-size: 32px;
+    }
+    .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding-left: 16px;
+        margin-left: 0;
+    }
+    .bonus-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 0;
+    }
+    .comprar h2 {
+        font-size: 28px;
+    }
+    .comprar__preco .preco-atual {
+        font-size: 36px;
+    }
+    .comprar__seguranca {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+}

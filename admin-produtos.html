@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Produtos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="img/3.png">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar" id="sidebar">
+            <div class="admin-sidebar__logo">
+                <img src="img/3.png" alt="Logo">
+                <h2>Admin</h2>
+            </div>
+            <ul class="admin-sidebar__menu">
+                <li><a href="admin.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="admin-eventos.html"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
+                <li><a href="admin-produtos.html" class="active"><i class="fas fa-box"></i> Produtos</a></li>
+                <li><a href="admin-depoimentos.html"><i class="fas fa-comment-dots"></i> Depoimentos</a></li>
+                <li><a href="admin-leads.html"><i class="fas fa-users"></i> Leads</a></li>
+            </ul>
+            <div class="admin-sidebar__footer">
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <button class="btn-toggle-sidebar" id="btnToggleSidebar"><i class="fas fa-bars"></i></button>
+                    <h1>Gerenciar Produtos</h1>
+                </div>
+                <button class="btn-primary" onclick="openModalProduto()"><i class="fas fa-plus"></i> Novo Produto</button>
+            </div>
+
+            <div class="admin-table-container">
+                <div class="admin-table-container__header">
+                    <h3>Todos os Produtos</h3>
+                    <input type="text" placeholder="Buscar produto..." id="searchProduto" onkeyup="filterTable('produtosTable', this.value)">
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="produtosTable">
+                        <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--cinza);">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="admin-modal" id="modalProduto">
+        <div class="admin-modal__content">
+            <button class="admin-modal__close" onclick="closeModalProduto()">&times;</button>
+            <h2 class="admin-modal__title" id="modalProdutoTitle">Novo Produto</h2>
+            <form id="formProduto" onsubmit="saveProduto(event)">
+                <input type="hidden" id="produto_id">
+                <div class="form-group">
+                    <label for="produto_nome">Nome *</label>
+                    <input type="text" id="produto_nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="produto_descricao">Descrição</label>
+                    <textarea id="produto_descricao" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="produto_preco">Preço (R$) *</label>
+                    <input type="number" id="produto_preco" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="produto_categoria">Categoria</label>
+                    <select id="produto_categoria">
+                        <option value="">Selecione...</option>
+                        <option value="Curso">Curso</option>
+                        <option value="Mentoria">Mentoria</option>
+                        <option value="Comunidade">Comunidade</option>
+                        <option value="Livro">Livro</option>
+                        <option value="E-book">E-book</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="produto_link">Link de Compra</label>
+                    <input type="text" id="produto_link" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label for="produto_imagem">URL da Imagem</label>
+                    <input type="text" id="produto_imagem" placeholder="/uploads/produto.jpg">
+                </div>
+                <button type="submit" class="btn-submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('adminToken');
+            if (!token) window.location.href = '/login.html';
+            loadProdutos();
+        });
+    </script>
+</body>
+</html>

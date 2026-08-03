@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Leads</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="img/3.png">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar" id="sidebar">
+            <div class="admin-sidebar__logo">
+                <img src="img/4.png" alt="Logo">
+                <h2>Admin</h2>
+            </div>
+            <ul class="admin-sidebar__menu">
+                <li><a href="admin.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="admin-eventos.html"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
+                <li><a href="admin-produtos.html"><i class="fas fa-box"></i> Produtos</a></li>
+                <li><a href="admin-depoimentos.html"><i class="fas fa-comment-dots"></i> Depoimentos</a></li>
+                <li><a href="admin-leads.html" class="active"><i class="fas fa-users"></i> Leads</a></li>
+            </ul>
+            <div class="admin-sidebar__footer">
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <button class="btn-toggle-sidebar" id="btnToggleSidebar"><i class="fas fa-bars"></i></button>
+                    <h1>Gerenciar Leads</h1>
+                </div>
+                <button class="btn-primary" onclick="exportarLeads()"><i class="fas fa-file-export"></i> Exportar CSV</button>
+            </div>
+
+            <div class="admin-table-container">
+                <div class="admin-table-container__header">
+                    <h3>Todos os Leads</h3>
+                    <input type="text" placeholder="Buscar lead..." id="searchLead" onkeyup="filterTable('leadsTable', this.value)">
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Telefone</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leadsTable">
+                        <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--cinza);">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('adminToken');
+            if (!token) window.location.href = '/login.html';
+            loadLeads();
+        });
+
+        async function exportarLeads() {
+            try {
+                const token = localStorage.getItem('adminToken');
+                const response = await fetch('/api/leads', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const leads = await response.json();
+
+                if (leads.length === 0) {
+                    alert('Nenhum lead para exportar');
+                    return;
+                }
+
+                let csv = 'ID,Nome,E-mail,Telefone,Data\n';
+                leads.forEach(lead => {
+                    csv += `${lead.id},"${lead.nome}","${lead.email}","${lead.telefone || ''}","${lead.created_at}"\n`;
+                });
+
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `leads_${new Date().toISOString().slice(0,10)}.csv`;
+                link.click();
+
+                showToast('Leads exportados com sucesso!', 'success');
+            } catch (error) {
+                console.error('Erro:', error);
+                showToast('Erro ao exportar', 'error');
+            }
+        }
+    </script>
+</body>
+</html>
